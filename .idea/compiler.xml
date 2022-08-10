@@ -13,6 +13,7 @@
         <module name="ruoyi-web" />
         <module name="ruoyi-admin" />
         <module name="ruoyi-dao" />
+        <module name="ruoyi-security" />
       </profile>
     </annotationProcessing>
   </component>
