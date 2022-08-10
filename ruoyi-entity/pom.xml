@@ -11,9 +11,25 @@
 
     <artifactId>ruoyi-entity</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bless</groupId>
+            <artifactId>ruoyi-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>3.5.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
