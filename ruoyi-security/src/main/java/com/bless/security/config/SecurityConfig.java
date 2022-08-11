@@ -13,8 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-@EnableGlobalMethodSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -42,22 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .and()
-                .formLogin()
-                .loginPage("/login.htm")
-                .loginProcessingUrl("/login")
-                .successHandler(successHandler)
-                //.failureForwardUrl("/login.htm")
-                .failureHandler(failureHandler)
-                .and()
-
-                .requestMatchers()
-                .antMatchers(
-                        "/login.htm",
-                        "/login"
-
-                );
+        http.cors().disable();
 
 
     }

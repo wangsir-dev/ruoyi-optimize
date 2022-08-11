@@ -2,7 +2,7 @@ package com.bless.security.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bless.entity.SysUser;
-import com.bless.framework.service.SysUserService;
+import com.bless.service.SysUserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
