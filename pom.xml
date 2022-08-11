@@ -37,6 +37,9 @@
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <fastjson.version>1.2.79</fastjson.version>
         <hutool.version>5.8.3</hutool.version>
+        <mybatis.plus.version>3.5.0</mybatis.plus.version>
+        <mysql.version>8.0.28</mysql.version>
+        <jedis.version>3.7.0</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -45,7 +48,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.6.1</version>
+                <version>2.6.9</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -96,6 +99,30 @@
                 <version>${hutool.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <!-- mybatis 多数据源配置 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <!-- mysql 连接器 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- redis 连接驱动 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
         </dependencies>
 
 
@@ -125,5 +152,24 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>prod</id>
+            <properties>
+                <activatedProperties>pro</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
