@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -127,6 +128,11 @@ public class SysUser implements Serializable {
      * 备注
      */
     private String remark;
+
+
+    private SysDept dept;
+
+    private List<SysRole> roles;
 
 
 }

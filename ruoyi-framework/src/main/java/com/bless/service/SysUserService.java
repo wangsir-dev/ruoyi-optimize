@@ -1,7 +1,10 @@
 package com.bless.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bless.entity.SysUser;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.bless.entity.SysUser;
  * @since 2022-08-10
  */
 public interface SysUserService extends IService<SysUser> {
+
+    List<SysUser> selectUserList(SysUser sysUser);
 
 }

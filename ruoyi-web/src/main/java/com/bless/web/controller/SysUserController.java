@@ -1,9 +1,10 @@
 package com.bless.web.controller;
 
 
-import cn.hutool.core.util.RuntimeUtil;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.bless.entity.SysUser;
+import com.bless.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -16,6 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys-user")
 public class SysUserController {
+
+    @Autowired
+    private SysUserService sysUserService;
+
+    @PostMapping("/list")
+    public Object list(@RequestBody SysUser sysUser){
+        return sysUserService.selectUserList(sysUser);
+    }
+
 
 
 }
