@@ -21,11 +21,12 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = request.getHeader("token");
+        String token = request.getHeader("Auth");
         UserServiceImpl.UserInfo u = (UserServiceImpl.UserInfo) this.tokenTemplate.opsForValue().get(token);
         if(ObjectUtil.isEmpty(u)){
-            return;
+
+        }else {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request,response);
     }
 }
