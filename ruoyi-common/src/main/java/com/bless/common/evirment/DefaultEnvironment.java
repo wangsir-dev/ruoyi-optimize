@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Component
+//@Component
 public class DefaultEnvironment implements EnvironmentAware {
     private static String prefix = "spring.redis";
     @Override

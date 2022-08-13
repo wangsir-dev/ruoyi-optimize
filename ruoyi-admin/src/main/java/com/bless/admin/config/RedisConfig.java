@@ -1,6 +1,8 @@
 package com.bless.admin.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -42,7 +44,6 @@ public class RedisConfig {
         template.setKeySerializer(new StringRedisSerializer() );
         template.setHashKeySerializer(new StringRedisSerializer());
         template.afterPropertiesSet();
-
         return template;
     }
 

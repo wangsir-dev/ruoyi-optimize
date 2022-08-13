@@ -55,17 +55,18 @@ spring:
         config:
           multi-statement-allow: true
   redis:
-    db0: #db0
+    db0:
       host: 124.222.10.96
       port: 6379
       database: 0
-    db1: #db1
+    db1:
       host: 124.222.10.96
       port: 6379
       database: 1
     jedis:
       pool:
+        max-idle: 8
         min-idle: 0
     sentinel:
-      master: 123.222.10.96:6379
-      nodes: 123.222.10.96:6379,123.222.10.96:6379
+      master: 124.222.10.96:6379
+      nodes: 124.222.10.96:6379,124.222.10.96:6379
