@@ -1,9 +1,13 @@
 package com.bless.security.hander;
 
 import cn.hutool.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -14,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +28,33 @@ import java.util.Map;
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 
+
+    public  LoginSuccessHandler(){
+
+    }
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-        Map<String,Object> success = new HashMap<String,Object>(){{
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        StringBuffer as = new StringBuffer();
+        for (GrantedAuthority authority : authorities) {
+            as.append(authority.getAuthority())
+                    .append(",");
+        }
+        String jwt = Jwts.builder()
+                .claim("authorities", as)//配置用户角色
+                .setSubject(authentication.getName())
+                .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .signWith(SignatureAlgorithm.HS512,"sang@123")
+                .compact();
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.write(new ObjectMapper().writeValueAsString(jwt));
+        out.flush();
+        out.close();
+        /*Map<String,Object> success = new HashMap<String,Object>(){{
             put("code",200);
             put("message","认证成功");
             put("path","login");
@@ -43,7 +72,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         PrintWriter writer = response.getWriter();
         writer.print(new JSONObject(success));
         writer.flush();
-        writer.close();
+        writer.close();*/
 
+        request.setCharacterEncoding("UTF-8");
+        request.setAttribute("21232","212");
+        final String method = request.getMethod();
+
+        request.getRequestDispatcher("/index").forward(request,response);
     }
 }
