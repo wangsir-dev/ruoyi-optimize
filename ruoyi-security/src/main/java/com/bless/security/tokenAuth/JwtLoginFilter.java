@@ -7,6 +7,7 @@ import com.bless.security.hander.LoginSuccessHandler;
 import com.bless.security.service.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,11 @@ import java.io.IOException;
 
 public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter  {
 
+    /**
+     * 引入token redis 数据源进行token 验证
+     */
+    @Autowired
+    private RedisTemplate tokenTemplate;
     /**
      * 登录失败业务逻辑处理
      */

@@ -13,14 +13,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler;
 
 import javax.servlet.Filter;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -50,7 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .anyRequest().authenticated();
 
         http.addFilterBefore( new JwtLoginFilter("/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class);
-
+        http.exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerImpl());
+        http.rememberMe().alwaysRemember(true);
+        //http.rememberMe().rememberMeParameter("remver")
+        http.logout().logoutUrl("/logout").logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
     }
 
