@@ -1,5 +1,6 @@
 package com.bless.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bless.entity.GenTableColumn;
 import com.bless.service.GenTableColumnService;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @author wyx
  * @since 2022-08-10
  */
-@Service
+//@Service
 public class GenTableColumnServiceImpl extends ServiceImpl<GenTableColumnMapper, GenTableColumn> implements GenTableColumnService {
 
 }

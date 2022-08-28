@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 密码
      * @return
      */
-    @Bean
+
     public BCryptPasswordEncoder bCrypt(){
         return new BCryptPasswordEncoder();
     }
@@ -44,13 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable();
-        http.authorizeHttpRequests().anyRequest().authenticated().and();
 
         http.authorizeHttpRequests()
-                        .antMatchers("/*")
-                        .permitAll()
-
-                        .anyRequest().authenticated();
+                        .
+                antMatchers("/*")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
 
         http.addFilterBefore( new JwtLoginFilter("/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerImpl());
@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(userDetailsService).passwordEncoder(bCrypt());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCrypt());
     }
 }
 
